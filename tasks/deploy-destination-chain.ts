@@ -110,7 +110,7 @@ task(`deploy-destination-chain-step2`, `Enables previously depolyed CrossChainNa
         console.log(`ℹ️  Attempting to call the enableChain function on the CrossChainNameServiceRegister smart contract on the ${hre.network.name} blockchain`);
         spinner.start();
 
-        const tx = await ccnsRegister.enableChain(destinationChainSelector, ccnsReceiverAddress, false, 200_000);
+        const tx = await ccnsRegister.enableChain(destinationChainSelector, ccnsReceiverAddress, 200_000);
         await tx.wait();
 
         spinner.stop();
