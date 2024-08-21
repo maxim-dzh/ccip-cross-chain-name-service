@@ -12,10 +12,10 @@ import {
   CrossChainNameServiceLookup__factory,
 } from "../typechain-types";
 
-describe("Test ccip-cross-chain name service", function () {
+describe("CrossChainNameService", function () {
   it("address of the registered name must be the EOA address.", async function () {
     const name = "alice.ccns";
-    // prepare settings and ccip local simulator
+    // prepare config and ccip local simulator
     const ccipLocalSimualtorFactory = await hre.ethers.getContractFactory(
       "CCIPLocalSimulator"
     );
@@ -70,11 +70,7 @@ describe("Test ccip-cross-chain name service", function () {
       ccnsReceiver.address,
       200_000
     );
-
-    // register a new name
-    const ccnsRegisterConnected: CrossChainNameServiceRegister =
-      ccnsRegister.connect(alice);
-    await ccnsRegisterConnected.register(name);
+    await ccnsRegister.register(name);
 
     const sourceNameAddress = await ccnsSourceLookup.lookup(name);
     expect(alice.address).equal(sourceNameAddress);
